@@ -25,6 +25,10 @@ public class SignupState {
         return username;
     }
 
+    public String clearUsername() {
+        return "";
+    }
+
     public String getUsernameError() {
         return usernameError;
     }
@@ -33,12 +37,19 @@ public class SignupState {
         return password;
     }
 
+    public String clearPassword() {
+        return "";
+    }
+
     public String getPasswordError() {
         return passwordError;
     }
 
     public String getRepeatPassword() {
         return repeatPassword;
+    }
+    public String clearRepeatPassword() {
+        return "";
     }
 
     public String getRepeatPasswordError() {

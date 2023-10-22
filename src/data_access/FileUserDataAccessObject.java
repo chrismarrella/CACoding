@@ -1,7 +1,8 @@
 package data_access;
-
+import java.util.ArrayList;
 import entity.User;
 import entity.UserFactory;
+import use_case.clear_users.ClearUserDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
@@ -11,7 +12,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, ClearUserDataAccessInterface {
 
     private final File csvFile;
 
@@ -85,7 +86,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         }
     }
 
-
     /**
      * Return whether a user exists with username identifier.
      * @param identifier the username to check.
@@ -96,4 +96,15 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         return accounts.containsKey(identifier);
     }
 
+    @Override
+    public ArrayList<String> clearUserData() {
+        ArrayList<String> users = new ArrayList<String>();
+        for(User user : accounts.values())
+        {
+            users.add(user.getName());
+        }
+        accounts.clear();
+        this.save();
+        return users;
+    }
 }
